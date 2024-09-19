@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3  # This is already up-to-date with Node.js 20
 
     - name: Setup FTP client
       run: sudo apt-get install -y lftp
@@ -26,4 +26,3 @@ jobs:
           mirror --reverse --delete --verbose ./ /path/on/server/
           bye
         " -u $FTP_USERNAME,$FTP_PASSWORD ftp://$FTP_SERVER
-
