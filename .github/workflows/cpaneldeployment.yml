@@ -1,25 +1,25 @@
-# .github/workflows/deploy.yml
 name: FTP Deploy
 
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch
+      - main  # Deploys on push to main branch
 
 jobs:
   ftp-deploy:
-    name: FTP Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3  # Check out the repository code
+        uses: actions/checkout@v3
 
-      - name: Deploy to cPanel via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.5.0  # Use FTP deploy action
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.1
         with:
-          server: ${{ secrets.FTP_SERVER }}  # FTP server, stored as a secret
-          username: ${{ secrets.FTP_USERNAME }}  # FTP username, stored as a secret
-          password: ${{ secrets.FTP_PASSWORD }}  # FTP password, stored as a secret
-          local-dir: ./  # Deploy everything from the root of the repository
-          server-dir: /public_html/your-folder/  # Change to your cPanel directory
+          server: 'ftp.hishabkhata.com'  # Correct input key
+          username: ${{ secrets.FTP_USERNAME }}  # Correct input key for username
+          password: ${{ secrets.FTP_PASSWORD }}  # Correct input key for password
+          protocol: 'ftp'  # Specify the protocol
+          port: 21  # Specify the FTP port
+          local-dir: './'  # Directory to upload
+          server-dir: '/'  # Destination directory on the FTP server
